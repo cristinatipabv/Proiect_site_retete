@@ -1,0 +1,76 @@
+
+.navigation_bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.alert {
+    color: red;
+}
+
+.recipe_container {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+    gap: 30px;
+}
+
+.recipe_card {
+    background: rgb(255,255,245);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 2px; /* Margini rotunjite */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.recipe_title {
+    color: black;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.recipe_image_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-width: 250px;
+    min-height: 250px;
+}
+
+.recipe_image {
+    object-fit: cover;
+    width: 250px;
+    height: 250px;
+}
+
+.recipe_actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.recipe_actions_buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 7px;
+}
+
+.recipe_actions_buttons > form {
+    margin: 0;
+    padding: 0;
+}
+.recipe_actions_buttons button {
+    padding: 1px 10px;
+}
+
+.search_bar {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}

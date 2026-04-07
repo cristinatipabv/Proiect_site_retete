@@ -1,0 +1,55 @@
+
+{% extends "base.html" %}
+
+{% block title %}Recipes List{% endblock %}
+
+{% block content %}
+  <h1>Retete de dulciuri:</h1>
+
+    {% for recipe in page_obj %}
+      <li class="recipe_card">
+        <div class="recipe_title">{{ recipe.title }}</div>
+        <div class="recipe_image_container">
+            {% if recipe.image %}
+              <img class="recipe_image" src="{{ recipe.image.url }}">
+            {% endif %}
+        </div>
+        <div class="recipe_content">
+          {{ recipe.content }} <p>by {{ recipe.author }}</p>
+        </div>
+        <div class="recipe_actions">
+          <a href="{% url 'user_recipes' recipe.user.id %}" >{{ recipe.user }}</a>
+          <div class="recipe_actions_buttons">
+            <a href="{% url 'delete_recipe' recipe.id %}">🗑️</a>
+            <a href="{% url 'update_recipe' recipe.id %}">✍️</a>
+            {% if recipe.image.name %}
+              <form method="post" action="{% url 'delete_recipe_image' recipe.id %}">
+                {% csrf_token %}
+                <button type="submit" >Delete Image</button>
+              </form>
+            {% endif %}
+          </div>
+        </div>
+      </li>
+    {% empty %}
+      <li>No Recipes Found.</li>
+    {% endfor %}
+  </ul>
+
+  <div>
+    {% if page_obj.has_previous %}
+      <a href="?page=1">First</a>
+      <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span>
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Next</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+  </div>
+
+{% endblock %}

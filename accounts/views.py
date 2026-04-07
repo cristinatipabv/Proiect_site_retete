@@ -13,7 +13,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect(next_url or "book_list")
+            return redirect(next_url or "recipe_list")
     else:
         form = AuthenticationForm()
     return render(request, "accounts/login.html", { "form": form })
@@ -33,4 +33,4 @@ def register_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("book_list")
+    return redirect("recipe_list")
