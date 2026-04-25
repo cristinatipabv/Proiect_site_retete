@@ -10,7 +10,6 @@ class RecipeForm(forms.ModelForm):
                   "nr_ingredients",
                   "time_minutes",
                   "servings",
-                  "author",
                   "image"]
         widgets = {
             'content': forms.Textarea(attrs={

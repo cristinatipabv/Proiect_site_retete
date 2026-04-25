@@ -2,8 +2,13 @@ import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.db.models import Q
+from django.template.context_processors import request
+
 from .models import Recipe
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+from .forms import RecipeForm
+from django.contrib import messages
 
 
 from accounts.models import CustomUser
@@ -16,15 +21,16 @@ from django.core.paginator import Paginator
 
 
 
-def recipe_list(request: HttpRequest):
-    recipes = Recipe.objects.all().order_by("-pk")
+def recipe_list(request):
+    recipes = Recipe.objects.all().order_by("-pk").select_related('user')
 
     paginator = Paginator(recipes, 5)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
     context = {
-        "page_obj": page_obj
+        "page_obj": page_obj,
+        # "user": request.user,
     }
     return render(request, "recipes/home.html", context)
 
@@ -40,7 +46,9 @@ def create_recipe(request: HttpRequest):
             # aici se intampla salvarea in baza de date
             recipe = form.save(commit=False)
             recipe.user = request.user
+            recipe.author = request.user.username
             recipe.save()
+            messages.success(request, f'Reteta "{recipe.title}" a fost adaugata cu succes!')
             return redirect("recipe_list")
     else:
         form = RecipeForm()
