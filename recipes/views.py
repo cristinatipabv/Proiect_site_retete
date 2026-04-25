@@ -2,6 +2,7 @@ import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.db.models import Q
+from .models import Recipe
 from django.core.paginator import Paginator
 
 
@@ -26,6 +27,10 @@ def recipe_list(request: HttpRequest):
         "page_obj": page_obj
     }
     return render(request, "recipes/home.html", context)
+
+def recipe_detail(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+    return render(request, 'recipes/recipe_detail.html', {'recipe': recipe})
 
 @login_required
 def create_recipe(request: HttpRequest):

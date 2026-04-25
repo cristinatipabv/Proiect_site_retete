@@ -1,16 +1,32 @@
+
 {% extends "base.html" %}
 
-{% block title %}Create recipe{% endblock %}
+{% block title %}Adauga Reteta{% endblock %}
 
 {% block content %}
+<div class="form-container" style="max-width: 800px; margin: 40px auto; padding: 30px; background: #fffdf7; border-radius: 16px;">
 
-  <h1>Recipe Form</h1>
+    <h1 style="text-align:center; color:#3f2a1e;">Adauga Reteta Noua</h1>
 
-  <form method="post" enctype="multipart/form-data" >
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-    <a href="{% url 'recipe_list' %}" >Cancel</a>
-  </form>
+    {% if form.errors %}
+        <div style="background:#ffebee; padding:15px; border-radius:8px; margin-bottom:20px;">
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <p style="color:#c62828;">⚠️ {{ field|title }}: {{ error }}</p>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% endif %}
 
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div style="margin-top: 30px; text-align:center;">
+            <button type="submit" style="padding:14px 40px; font-size:18px; background:#8b4513; color:white; border:none; border-radius:12px; cursor:pointer;">
+                💾 Salveaza Reteta
+            </button>
+        </div>
+    </form>
+</div>
 {% endblock %}

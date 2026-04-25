@@ -10,9 +10,10 @@ class Recipe(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     author = models.CharField(max_length=200, default="No Author")
-    ingredients = models.TextField(max_length=200)
+    ingredients = models.TextField(max_length=20000)
     nr_ingredients = models.IntegerField(default=0)
     time_minutes = models.IntegerField(default=0)
+    servings = models.PositiveIntegerField(null=True, blank=True, verbose_name="Numar portii")
 
     image = models.ImageField(
         upload_to="recipe_images/",
