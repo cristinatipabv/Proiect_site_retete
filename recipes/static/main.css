@@ -19,17 +19,23 @@
 }
 
 .recipe_card {
-    background: rgb(255,255,245);
-    border: none;
-    padding: 12px 24px;
-    border-radius: 2px; /* Margini rotunjite */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background: #f8f6ec;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recipe_card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
 }
 
 .recipe_title {
-    color: black;
-    text-align: center;
-    padding-bottom: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 
 .recipe_image_container {
@@ -42,22 +48,24 @@
 }
 
 .recipe_image {
-    object-fit: cover;
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto 15px auto;
 }
 
 .recipe_actions {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
 }
 
 .recipe_actions_buttons {
     display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    gap: 7px;
+    gap: 10px;
 }
 
 .recipe_actions_buttons > form {
@@ -71,6 +79,32 @@
 .search_bar {
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    gap: 10px;
     align-items: center;
+    margin-bottom: 25px;
+}
+.search_bar input,
+.search_bar select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.search_bar button {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .search_bar {
+        flex-direction: column;
+    }
+
+    .recipe_image {
+        max-width: 100%;
+    }
 }

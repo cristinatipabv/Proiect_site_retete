@@ -12,3 +12,6 @@ class RecipeForm(forms.ModelForm):
                   "author",
                   "image"]
         # fields = "__all__"
+
+
+

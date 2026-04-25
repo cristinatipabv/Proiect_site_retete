@@ -1,6 +1,9 @@
 import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from django.db.models import Q
+from django.core.paginator import Paginator
+
 
 from accounts.models import CustomUser
 from recipes.forms import RecipeForm
@@ -98,11 +101,22 @@ def user_recipes(request: HttpRequest, pk: int):
 
 def search_recipes(request: HttpRequest):
     q = request.GET.get("q")
+    author = request.GET.get("author")
+    sort = request.GET.get("sort")
 
-    if q is None:
-        recipes = Recipe.objects.all().order_by("-pk")
+    recipes = Recipe.objects.all()
+
+    if q:
+        recipes = recipes.filter(
+            Q(title__icontains=q) |
+            Q(content__icontains=q)
+        )
+    if author:
+        recipes = recipes.filter(user__username__icontains=author)
+    if sort == "oldest":
+        recipes = recipes.order_by("pk")
     else:
-        recipes = Recipe.objects.filter(title__contains=q).all().order_by("-pk")
+        recipes = recipes.order_by("-pk")
 
     paginator = Paginator(recipes, 5)
     page_number = request.GET.get("page")
@@ -114,6 +128,22 @@ def search_recipes(request: HttpRequest):
 
     return render(request, "recipes/home.html", context)
 
+    # if q is None:
+    #     recipes = Recipe.objects.all().order_by("-pk")
+    # else:
+    #     recipes = Recipe.objects.filter(title__contains=q).all().order_by("-pk")
+    #
+    # paginator = Paginator(recipes, 5)
+    # page_number = request.GET.get("page")
+    # page_obj = paginator.get_page(page_number)
+    #
+    # context = {
+    #     "page_obj": page_obj
+    # }
+    #
+    # return render(request, "recipes/home.html", context)
+
 
 def simple_endpoint(request: HttpRequest):
     return HttpResponse("{ 'content': 'Hello this is my response to your request'}", status=202)
+
