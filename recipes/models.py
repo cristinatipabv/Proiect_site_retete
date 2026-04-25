@@ -10,7 +10,7 @@ class Recipe(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     author = models.CharField(max_length=200, default="No Author")
-    ingredients = models.CharField(max_length=200)
+    ingredients = models.TextField(max_length=200)
     nr_ingredients = models.IntegerField(default=0)
     time_minutes = models.IntegerField(default=0)
 
