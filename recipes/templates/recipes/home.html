@@ -12,10 +12,8 @@
   <input type="text" name="author" placeholder="Autor" value="{{ request.GET.author }}">
 
   <select name="sort">
-    <option value="">Newest</option>
-    <option value="oldest" {% if request.GET.sort == "oldest" %}selected{% endif %}>
-      Oldest
-    </option>
+    <option value="newest" {% if sort == "newest" %}selected{% endif %}>Newest</option>
+    <option value="oldest" {% if sort == "oldest" %}selected{% endif %}>Oldest</option>
   </select>
 
   <button type="submit">Search</button>

@@ -102,7 +102,7 @@ def user_recipes(request: HttpRequest, pk: int):
 def search_recipes(request: HttpRequest):
     q = request.GET.get("q")
     author = request.GET.get("author")
-    sort = request.GET.get("sort")
+    sort = request.GET.get("sort", "newest")
 
     recipes = Recipe.objects.all()
 
@@ -141,6 +141,7 @@ def search_recipes(request: HttpRequest):
     #     "page_obj": page_obj
     # }
     #
+    # return render(request, "recipes/home.html", context)
     # return render(request, "recipes/home.html", context)
 
 
