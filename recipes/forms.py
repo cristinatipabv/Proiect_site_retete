@@ -18,8 +18,9 @@ class RecipeForm(forms.ModelForm):
                 'style': 'width: 100%; font-family: monospace;'
             }),
             'ingredients': forms.Textarea(attrs={
-                'rows': 8,
-                'placeholder': 'Scrie ingredientele (unul pe linie)...'
+                'rows': 12,
+                'placeholder': 'Scrie ingredientele (unul pe linie)...',
+                'style': 'width: 100%; font-family: monospace;'
             }),
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'servings': forms.NumberInput(attrs={'min': 1, 'placeholder': 'Ex: 8'}),
