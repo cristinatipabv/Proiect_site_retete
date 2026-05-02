@@ -19,6 +19,7 @@ class Recipe(models.Model):
         upload_to="recipe_images/",
         null=True,
         blank=True,
+        # verbose_name="Imagine"
     )
 
     # one-to-many relationship here:
@@ -28,8 +29,17 @@ class Recipe(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
+        # verbose_name="Utilizator"
     )
-    # related_name="recipes" -> parametru adaugat automat fiecarui obiect CustomUser, unde avem acces la o lista cu cartile care apartin user-ului.
-
+    # # Campuri recomandate pentru sortare și tracking
+    # created_at = models.DateTimeField(auto_now_add=True, verbose_name="Creat la")
+    # updated_at = models.DateTimeField(auto_now=True, verbose_name="Actualizat la")
+    #
+    # class Meta:
+    #     ordering = ['-created_at']  # Cel mai nou primul (recomandat)
+    #     # ordering = ['title']              # Alternativ: alfabetic
+    #     verbose_name = "Reteta"
+    #     verbose_name_plural = "Retete"
+    #
     def __str__(self):
         return f"{self.title}, {self.content}, by {self.author}"

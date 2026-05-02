@@ -7,7 +7,7 @@
   <h1>Retete de dulciuri:</h1>
 
 <form class="search_bar" action="{% url 'search_recipes' %}" method="get">
-  <input type="text" name="q" placeholder="Caută după titlu sau conținut" value="{{ request.GET.q }}">
+  <input type="text" name="q" placeholder="Cauta după titlu sau continut" value="{{ request.GET.q }}">
 
   <input type="text" name="author" placeholder="Autor" value="{{ request.GET.author }}">
 
@@ -73,19 +73,19 @@
 
             <!-- Actions -->
             <div class="recipe_actions">
-                <a href="{% url 'recipe_detail' recipe.id %}" class="btn-view">Vezi rețeta completă →</a>
+                <a href="{% url 'recipe_detail' recipe.id %}" class="btn-view">Vezi reteta completa →</a>
 
                 {% if request.user == recipe.user %}
                     <div class="recipe_actions_buttons">
-                        <a href="{% url 'update_recipe' recipe.id %}" class="btn-edit">✍️ Editează</a>
+                        <a href="{% url 'update_recipe' recipe.id %}" class="btn-edit">✍️ Editeaza</a>
                         <a href="{% url 'delete_recipe' recipe.id %}" class="btn-delete"
-                           onclick="return confirm('Sigur vrei să ștergi această rețetă?')">🗑️ Șterge</a>
+                           onclick="return confirm('Sigur vrei să stergi aceasta reteta?')">🗑️ Sterge</a>
 
                         {% if recipe.image %}
                             <form method="post" action="{% url 'delete_recipe_image' recipe.id %}" style="display:inline;">
                                 {% csrf_token %}
                                 <button type="submit" class="btn-delete-small"
-                                        onclick="return confirm('Ștergi imaginea?')">🖼️ Șterge foto</button>
+                                        onclick="return confirm('Ștergi imaginea?')">🖼️ Sterge foto</button>
                             </form>
                         {% endif %}
                     </div>
@@ -94,7 +94,7 @@
         </li>
     {% empty %}
         <li style="text-align: center; padding: 60px; font-size: 18px; color: #777;">
-            😕 Nu am găsit nicio rețetă...
+            😕 Nu am găsit nicio reteta...
         </li>
     {% endfor %}
 </ul>
